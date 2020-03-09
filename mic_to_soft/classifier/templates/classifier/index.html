@@ -3,17 +3,105 @@
 {% block title %} top {% endblock %}
 
 {% block contents %}
-    <p>here is home</p>
 
-    datas
-    <form action="{% url 'index' %}" method="post" id="dataform" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Upload">
-    </form>
-    {% for data in datas %}
-        <p>----------</p>
-        {{ data.title }}
-        {{ data.textdata.url }}
-    {% endfor %}
+    <div class="overview">
+        <h2 class="section">サービス概要</h2>
+        <p>本サービスは文章データのデータセットを元に，
+        文章を分類するモデルを作成する無料サービスです．
+        誰でも簡単に作成することができます．
+        用意していただくものは，大量の文章データだけです．
+        モデル一覧からモデル作成へ移動し以下の学習モデルの作り方を参考にしてください．
+        </p>
+
+    </div>
+
+    <div class="tutorial">
+        <h2 class="section">学習モデルの作り方</h2>
+        <p>学習器の作成ページへ移動し，フォームを入力してください．</p>
+
+        {% load static %}
+        <img src="{% static 'home/create_model.png' %}" alt="crete-model" width="50%">
+        <p>ユーザIDはユーザを識別するのに使います．</p>
+        <p>パスワードはモデルの管理（編集，削除）に使います．</p>
+        <p>タイトルはモデルのタイトルです．モデル一覧にそのタイトルが表示されます．</p>
+        <p>説明はそのモデルの分類する分野や，ラベルを記述して下さい．</p>
+        <br>
+        <p>学習データは次の項目を満たす必要があります．</p>
+
+        <br>
+        <li>モデルのトレーニングに使用するコンテンツを含むソース,テキスト,ドキュメントを20個以上,100,000個以下の範囲で指定する.</li>
+        <li>2個以上、100個以下の一意のラベルを指定する.</li>
+        <li>様々な長さ,言い回し,スタイルのドキュメントを学習用データとする.</li>
+        <li>人間が読んで容易に分類可能なドキュメントを使用する.</li>
+        <li>ラベルあたり少なくとも1,000のトレーニングドキュメントを用意する.</li>
+        <li>非常に低い頻度のラベルは削除する.</li>
+        <li>定義されたラベルのいずれとも一致しないドキュメント用のラベルを用意する.</li>
+        <br>
+
+        <p class="danger">データセットの拡張子は.csvです．データセットはサーバに保存されます</p>
+
+        <br>
+
+        <p　class="notice">最後にモデル作成というボタンを押してください．モデル一覧に移動します．
+            モデルの作成にはデータの数に比例して長時間かかります．</p>
+
+
+        <p>モデル一覧からモデルを選択すると詳細画面に移動します．
+            その詳細画面にはモデルのハッシュ値や，サンプルで文章分類できるフォームがあります．
+        </p>
+
+        <br>
+
+        <h2 class="section">APIの使いかた</h2>
+        <p>ソースコード例</p>
+        <img src="{% static 'home/api_sample.png' %}" alt="api-sample" width="50%">
+
+        <br>
+
+        <div class="parameter_list">
+            <table class="parameter_list" border="1">
+                <caption>リクエストパラメータ</caption>
+                <tr>
+                    <th>パラメータ</th>
+                    <th>値</th>
+                    <th>説明</th>
+                </tr>
+                <tr>
+                    <td>model_hash</td>
+                    <td>文字列</td>
+                    <td>モデルのハッシュ値です．モデルを識別するのに使います．</td>
+                </tr>
+                <tr>
+                    <td>text</td>
+                    <td>文字列</td>
+                    <td>分類したい文字列を入力します．</td>
+                </tr>
+            </table>
+        </div>
+
+        <br>
+
+        <div class="parameter_list">
+            <table class="parameter_list" border="1">
+                <caption>レスポンスフィールド</caption>
+                <tr>
+                    <th>フィールド</th>
+                    <th>値</th>
+                    <th>説明</th>
+                </tr>
+                <tr>
+                    <td>class</td>
+                    <td>文字列</td>
+                    <td>分類結果です．モデルによって種類の数が異なります．</td>
+                </tr>
+            </table>
+        </div>
+
+        <br>
+
+        <p>API URL :
+            http://www.mictosoft.work/api
+        </p>
+    </div>
+
 {% endblock %}

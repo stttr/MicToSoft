@@ -1,0 +1,146 @@
+header{
+    background-color: $main-color;
+    top: 0;
+    position: sticky;
+    @include desktop{
+        position: inherit;
+    }
+    h1{
+        @include header-title;
+        a, a:hover{
+            color: white;
+            text-decoration: none;
+        }
+    }
+    div{
+        position: relative;
+        @include outer-header;
+    }
+}
+
+
+
+
+#menu-trigger{
+    width: 40px;
+    height: 35px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    &, span{
+        display: inline-block;
+        transition: all .4s;
+        box-sizing: border-box;
+        @include desktop{display: none;}
+    }
+    span{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #fff;
+        border-radius: 4px;
+        &:nth-of-type(1){top: 0;}
+        &:nth-of-type(2){top: 16px;}
+        &:nth-of-type(3){bottom: 0;}
+    }
+    &.active{
+        span:nth-of-type(1){transform: translateY(16px) rotate(-45deg);}
+        span:nth-of-type(2){opacity: 0;}
+        span:nth-of-type(3){transform: translateY(-16px) rotate(45deg);}
+    }
+}
+
+
+
+
+
+#top-menu{
+    z-index: 2;
+    background-color: $sub-color;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 220px;
+    overflow: scroll;
+    transition: .5s;
+    left: -500px;
+    &.active{left: 0;}
+    ul{@include outer-base;}
+    li>ul{padding-top: 0; width: 100%;box-sizing: border-box;}
+    a, p{
+        @include nav-text;
+        text-align: left;
+        display: block;
+        &+ul{padding-left: 20px;}
+        padding-left: 10px;
+    }
+    a{border-bottom: white 1px solid;}
+    &>ul>li{margin-bottom: 25px;}
+
+
+    li:hover i{animation: 1.5s ease .0s infinite normal rotate_loop;}
+    @keyframes rotate_loop{
+        0%{transform: rotate(0deg);}
+        100%{transform: rotate(360deg);}
+    }
+
+
+    @include desktop{
+        background-color: $main-color;
+        position: sticky;
+        bottom: initial;
+        overflow: initial;
+        width: auto;
+        &>ul>li{margin-bottom: 0;}
+        li{
+            padding: 10px 0;
+            &:first-child{a,p{border-left: white 1px solid;}}
+            &:hover ul{
+                display: flex;
+                animation: .5s feedin;
+            }
+        }
+        a, p{
+            border: none;
+            text-align: center;
+            min-width: 150px;
+            padding-right: 10px;
+            border-right: white 1px solid;
+        }
+        ul{
+            @include flex;
+            justify-content: center;
+            padding: 0;
+            max-width: initial;
+            position: relative;
+            ul{
+                display: none;
+                background-color: $sub-color;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                padding: 0;
+            }
+        }
+        @keyframes feedin{
+            0%{display: flex; opacity: 0;}
+            100%{opacity: 1;}
+        }
+        .signmenu{
+            position: absolute;
+            padding: 0;
+            top: -250%;
+            right: 10px;
+            &:nth-of-type(even){right: 110px;}
+            a{
+                padding: 4px;
+                min-width: 0;
+                line-height: normal;
+                border: none !important;
+            }
+        }
+    }
+}

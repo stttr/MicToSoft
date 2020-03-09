@@ -1,0 +1,13 @@
+[
+    {
+        "model" : "classifier.classifier",
+        "fields" : {
+            "userid" : "user1",
+            "password" : "password1",
+            "title" : "title1",
+            "description" : "description1",
+            "model" : "model1",
+            "model_hash" : "mdoelhash1"
+        }
+    }
+]

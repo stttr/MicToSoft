@@ -4,24 +4,50 @@
     <head>
         <meta charset="utf-8">
         <title>MicToSoft:{% block title %} {% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <!-- <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css"> -->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/smooth-scroll@16/dist/smooth-scroll.min.js"></script>
     </head>
 
     <body>
-        <div class="page-header">
-            <a href="{% url 'signin' %}" class="top-menu">signin</a>
-            <a href="{% url 'board' %}" class="top-menu">board</a>
-            <a href="{% url 'mypage' %}" class="top-menu">mypage</a>
-            <a href="{% url 'about' %}" class="top-menu">about</a>
-            <h1><a href="/">MicToSoft</a></h1>
-        </div>
 
-        <div class="content">
+    <header>
+        <div>
+            <h1><a href="/">MicToSoft</a></h1>
+            <p id="menu-trigger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </p>
+        </div>
+    </header>
+
+
+    <nav id="top-menu">
+        <ul>
+            <li><a href="{% url 'index' %}"><i class="fas fa-home"></i> ホーム</a></li>
+            <li><a href="{% url 'models' %}"><i class="fas fa-rss-square"></i> モデル一覧</a></li>
+        </ul>
+      </nav>
+
+
+    <main>
+        <div class="contents">
             {% block contents %} {% endblock %}
         </div>
-    </body>
+    </main>
 
+    <footer>
+        <div>
+            <p>MicToSoft</p>
+            <a href="#" class="top-return"><i class="fas fa-chevron-up"></i></a>
+        </div>
+    </footer>
+
+    </body>
+    <script src="{% static 'js/base.js' %}"></script>
 </html>
